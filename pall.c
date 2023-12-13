@@ -7,16 +7,19 @@
  */
 void pall(stack_t **stack, unsigned int line_number)
 {
-    /* Implement the logic for pall opcode here */
-    /* Example:
-    if (*stack == NULL) {
-        return; // Stack is empty, nothing to print
+    stack_t *current = *stack;
+
+    /* Check if the stack exists */
+    if (!stack)
+    {
+        fprintf(stderr, "L%u: Stack doesn't exist\n", line_number);
+        exit(EXIT_FAILURE);
     }
 
-    stack_t *current = *stack;
-    while (current != NULL) {
+    /* Print values on the stack */
+    while (current)
+    {
         printf("%d\n", current->n);
         current = current->next;
     }
-    */
 }
