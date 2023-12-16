@@ -1,75 +1,74 @@
 #include "monty.h"
 
 /**
- * rotate_left - Rotate the stack to the left
- * @stack: Double linked list representing the stack
- * @line_number: Line number in the file
+ * rotl - s
+ * @stack: Double linked list
+ * @line_number: File line execution
  */
-void rotate_left(stack_t **stack, unsigned int line_number) {
-    stack_t *temp = *stack;
-    (void)line_number;
+void rotl(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tm = *stack;
+	(void) line_number;
 
-    if (temp && temp->next) {
-        while (temp->next != NULL) {
-            stack_t *next_node = temp->next;
-            temp->next = next_node->next;
-            if (next_node->next)
-                next_node->next->prev = temp;
-            next_node->next = *stack;
-            next_node->prev = NULL;
-            (*stack)->prev = next_node;
-            *stack = next_node;
-        }
-    }
+	if (!stack || !*stack || !(*stack)->next)
+		return;
+	(*stack)->next->prev = NULL;
+	while (tm->next)
+		tm = tm->next;
+	tm->next = *stack;
+	(*stack) = (*stack)->next;
+	tm->next->next = NULL;
+	tm->next->prev = tm;
 }
 
 /**
- * rotate_right - Rotate the stack to the right
- * @stack: Double linked list representing the stack
- * @line_number: Line number in the file
+ * rotr - s
+ * @stack: Double linked list
+ * @line_number: File line execution
  */
-void rotate_right(stack_t **stack, unsigned int line_number) {
-    stack_t *temp = *stack;
-    (void)line_number;
+void rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp;
+	(void) line_number;
 
-    if (temp && temp->next) {
-        while (temp->next != NULL) {
-            temp = temp->next;
-        }
-        while (temp != *stack) {
-            stack_t *prev_node = temp->prev;
-            temp->prev = prev_node->prev;
-            if (prev_node->prev)
-                prev_node->prev->next = temp;
-            temp->next = *stack;
-            temp->prev = NULL;
-            (*stack)->prev = temp;
-            *stack = temp;
-            temp = prev_node;
-        }
-    }
+	if (!stack || !*stack || !(*stack)->next)
+		return;
+
+	tmp = *stack;
+	while (tmp->next)
+		tmp = tmp->next;
+
+	tmp->next = *stack;
+	tmp->prev->next = NULL;
+	tmp->prev = NULL;
+
+	(*stack)->prev = tmp;
+	*stack = tmp;
+
 }
 
 /**
- * set_stack_mode - Set the mode to stack (LIFO)
- * @stack: Double linked list representing the stack
- * @line_number: Line number in the file
+ * stack - s
+ * @stack: Double linked list
+ * @line_number: File line execution
  */
-void set_stack_mode(stack_t **stack, unsigned int line_number) {
-    (void)line_number;
-    (void)stack;
+void stack(stack_t **stack, unsigned int line_number)
+{
+	(void) line_number;
+	(void) stack;
 
-    var.MODE = 0;
+	var.MODE = 0;
 }
 
 /**
- * set_queue_mode - Set the mode to queue (FIFO)
- * @stack: Double linked list representing the stack
- * @line_number: Line number in the file
+ * queue - s
+ * @stack: Double linked list
+ * @line_number: File line execution
  */
-void set_queue_mode(stack_t **stack, unsigned int line_number) {
-    (void)line_number;
-    (void)stack;
+void queue(stack_t **stack, unsigned int line_number)
+{
+	(void) line_number;
+	(void) stack;
 
-    var.MODE = 1;
+	var.MODE = 1;
 }
